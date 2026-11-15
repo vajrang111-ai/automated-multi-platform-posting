@@ -1,0 +1,225 @@
+{
+  "_metadata": {
+    "title": "Automated Multi-Platform Posting System — Live Execution Log",
+    "captured_at": "2026-11-15T17:36:51Z",
+    "server_command": "uvicorn app.main:app --host 0.0.0.0 --port 4000",
+    "swagger_ui": "http://localhost:4000/docs",
+    "pytest_summary": "56 passed in 1.89s",
+    "python_version": "3.10.7"
+  },
+  "pytest_run": {
+    "command": "venv\\Scripts\\pytest tests\\test_posting.py -v",
+    "exit_code": 0,
+    "total_collected": 56,
+    "summary": "56 passed in 1.89s",
+    "test_classes": [
+      {
+        "class": "TestValidPosting",
+        "count": 7,
+        "tests": [
+          "test_valid_message_returns_200 PASSED",
+          "test_response_has_success_true PASSED",
+          "test_response_has_results_list_of_5 PASSED",
+          "test_each_result_has_all_required_fields PASSED",
+          "test_success_entries_non_null_fields PASSED",
+          "test_failed_entries_null_fields PASSED",
+          "test_platform_field_not_accepted_in_request PASSED"
+        ]
+      },
+      {
+        "class": "TestMessageTooLong",
+        "count": 4,
+        "tests": [
+          "test_201_char_message_returns_422 PASSED",
+          "test_very_long_message_returns_422 PASSED",
+          "test_422_body_has_success_false PASSED",
+          "test_exactly_200_chars_accepted PASSED"
+        ]
+      },
+      {
+        "class": "TestZeroUrls",
+        "count": 5,
+        "tests": [
+          "test_no_url_returns_422 PASSED",
+          "test_empty_message_returns_422 PASSED",
+          "test_whitespace_only_returns_422 PASSED",
+          "test_no_url_body_success_false PASSED",
+          "test_ftp_url_treated_as_no_cta_link PASSED"
+        ]
+      },
+      {
+        "class": "TestMultipleUrls",
+        "count": 4,
+        "tests": [
+          "test_two_urls_returns_422 PASSED",
+          "test_three_urls_returns_422 PASSED",
+          "test_multiple_urls_body_success_false PASSED",
+          "test_multiple_urls_mentions_count PASSED"
+        ]
+      },
+      {
+        "class": "TestInvalidUrl",
+        "count": 5,
+        "tests": [
+          "test_url_without_tld_returns_422 PASSED",
+          "test_url_bare_scheme_returns_422 PASSED",
+          "test_valid_https_url_accepted PASSED",
+          "test_valid_http_url_accepted PASSED",
+          "test_invalid_url_body_success_false PASSED"
+        ]
+      },
+      {
+        "class": "TestPartialFailureResilience",
+        "count": 6,
+        "tests": [
+          "test_partial_failure_returns_200 PASSED",
+          "test_partial_failure_returns_all_5_results PASSED",
+          "test_all_platforms_fail_still_200 PASSED",
+          "test_failed_platforms_null_fields PASSED",
+          "test_success_true_with_partial_failures PASSED",
+          "test_mixed_statuses_in_results PASSED"
+        ]
+      },
+      {
+        "class": "TestTrailingPunctuationStripping",
+        "count": 14,
+        "tests": [
+          "test_strip_trailing_period PASSED",
+          "test_strip_trailing_comma PASSED",
+          "test_strip_trailing_exclamation PASSED",
+          "test_strip_trailing_question_mark PASSED",
+          "test_strip_trailing_semicolon PASSED",
+          "test_strip_trailing_colon PASSED",
+          "test_strip_multiple_trailing_chars PASSED",
+          "test_no_strip_from_path PASSED",
+          "test_no_strip_from_subdomain PASSED",
+          "test_url_ending_with_period_accepted_200 PASSED",
+          "test_url_ending_with_comma_accepted_200 PASSED",
+          "test_url_ending_with_exclamation_accepted_200 PASSED",
+          "test_url_in_markdown_link_syntax PASSED"
+        ]
+      },
+      {
+        "class": "TestPostingRequestSchema",
+        "count": 11,
+        "tests": [
+          "test_valid_message_accepted PASSED",
+          "test_cta_url_property_clean PASSED",
+          "test_cta_url_strips_trailing_period PASSED",
+          "test_empty_message_raises PASSED",
+          "test_whitespace_message_raises PASSED",
+          "test_too_long_message_raises PASSED",
+          "test_exactly_200_chars_valid PASSED",
+          "test_no_url_raises PASSED",
+          "test_multiple_urls_raises PASSED",
+          "test_invalid_url_tld_raises PASSED",
+          "test_valid_http_url_accepted PASSED",
+          "test_valid_https_subdomain_accepted PASSED"
+        ]
+      }
+    ]
+  },
+  "server_startup_logs": [
+    "INFO:     Started server process [9852]",
+    "INFO:     Waiting for application startup.",
+    "INFO:     Application startup complete.",
+    "INFO:     Uvicorn running on http://0.0.0.0:4000 (Press CTRL+C to quit)",
+    "INFO:     127.0.0.1:49968 - \"POST /posting HTTP/1.1\" 200 OK"
+  ],
+  "live_request": {
+    "method": "POST",
+    "url": "http://localhost:4000/posting",
+    "request_body": {
+      "message": "Check out our latest business platform and grow your online visibility. https://example.com"
+    },
+    "http_status": 200,
+    "response_body": {
+      "success": true,
+      "results": [
+        {
+          "platform": "Telegraph",
+          "status": "failed",
+          "posted_url": null,
+          "public_access": false,
+          "date": null,
+          "time": null,
+          "error": "ConnectError"
+        },
+        {
+          "platform": "Dpaste",
+          "status": "success",
+          "posted_url": "https://dpaste.com/4TXMHKAYN",
+          "public_access": true,
+          "date": "2026-11-15",
+          "time": "17:36:51",
+          "error": null
+        },
+        {
+          "platform": "Ntfy.sh",
+          "status": "success",
+          "posted_url": "https://ntfy.sh/dxora_automated_posting_feed",
+          "public_access": true,
+          "date": "2026-11-15",
+          "time": "17:36:51",
+          "error": null
+        },
+        {
+          "platform": "GitHub Gist",
+          "status": "failed",
+          "posted_url": null,
+          "public_access": false,
+          "date": null,
+          "time": null,
+          "error": "Authentication failed: Missing GITHUB_TOKEN"
+        },
+        {
+          "platform": "HuggingFace",
+          "status": "failed",
+          "posted_url": null,
+          "public_access": false,
+          "date": null,
+          "time": null,
+          "error": "Authentication failed: Missing HF_API_TOKEN"
+        }
+      ]
+    }
+  },
+  "validation_422_examples": {
+    "message_too_long": {
+      "request": { "message": "AAAA...(181 chars) https://example.com" },
+      "http_status": 422,
+      "response": {
+        "success": false,
+        "detail": "Validation failed",
+        "errors": [{ "field": "message", "message": "Value error, message must not exceed 200 characters (received 201 characters).", "type": "value_error" }]
+      }
+    },
+    "zero_links": {
+      "request": { "message": "No link here at all." },
+      "http_status": 422,
+      "response": {
+        "success": false,
+        "detail": "Validation failed",
+        "errors": [{ "field": "message", "message": "Value error, message must contain exactly one CTA link (http:// or https://). Zero links found.", "type": "value_error" }]
+      }
+    },
+    "multiple_links": {
+      "request": { "message": "Visit https://example.com and also https://another.com" },
+      "http_status": 422,
+      "response": {
+        "success": false,
+        "detail": "Validation failed",
+        "errors": [{ "field": "message", "message": "Value error, message must contain exactly one CTA link (http:// or https://). 2 links found.", "type": "value_error" }]
+      }
+    },
+    "invalid_url_format": {
+      "request": { "message": "Visit http://localhost for info." },
+      "http_status": 422,
+      "response": {
+        "success": false,
+        "detail": "Validation failed",
+        "errors": [{ "field": "message", "message": "Value error, The CTA URL 'http://localhost' is invalid. It must have a valid scheme (http/https), domain, and TLD.", "type": "value_error" }]
+      }
+    }
+  }
+}

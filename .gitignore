@@ -1,0 +1,43 @@
+# =============================================
+# Automated Multi-Platform Posting System
+# =============================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables (never commit secrets)
+.env
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+*.xml
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs (keep sample_execution.json but ignore live logs)
+logs/*.log
+
+# OS
+.DS_Store
+Thumbs.db
